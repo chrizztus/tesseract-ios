@@ -31,6 +31,7 @@ Usage
 Here is the default workflow to extract text from an image:
 
  - Instantiate Tesseract with data path and language
+ - Set the delegate
  - Set variables (character set, …)
  - Set the image to analyze
  - Start recognition
@@ -44,6 +45,7 @@ Code Sample
     #import "Tesseract.h"
     
     Tesseract* tesseract = [[Tesseract alloc] initWithDataPath:@"tessdata" language:@"eng"];
+    [tesseract setTessDelegate:self];
     [tesseract setVariableValue:@"0123456789" forKey:@"tessedit_char_whitelist"];
     [tesseract setImage:[UIImage imageNamed:@"image_sample.jpg"]];
     [tesseract recognize];
@@ -104,3 +106,9 @@ Get the text extracted from the image.
 `- (void) clear`
 
 Clears Tesseract object after text has been recognized from image. Preventing memory leaks.
+
+### -progressUpdate ###
+
+`- (void)progressUpdate:(NSUInteger)progress`
+
+Function that will be called on progress update during recognizing
