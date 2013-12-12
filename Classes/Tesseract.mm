@@ -192,7 +192,12 @@ namespace tesseract {
 }
 
 - (BOOL)recognize {
+    int returnCode = _tesseract->Recognize(NULL);
+    return (returnCode == 0) ? YES : NO;
+}
   
+- (BOOL)recognizeWithProgressUpdate {
+
     _progress = 0;
     ETEXT_DESC *monitor = new ETEXT_DESC;
 

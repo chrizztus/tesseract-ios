@@ -72,6 +72,7 @@ extern NSString * const OcrEngineModeDefault;
 - (void)setImage:(UIImage *)image;
 - (BOOL)setLanguage:(NSString *)language;
 - (BOOL)recognize;
+- (BOOL)recognizeWithProgressUpdate;
 - (NSString *)recognizedText;
 - (void)clear;
 

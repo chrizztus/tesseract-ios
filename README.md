@@ -95,6 +95,12 @@ Override the language defined with `-initWithDataPath:language:`.
 
 Start text recognition. You might want to launch this process in background with `NSObject`'s `-performSelectorInBackground:withObject:`. 
 
+### -recognizeWithProgressUpdate ###
+
+`- (BOOL)recognizeWithProgressUpdate`
+
+Start text recognition with progress update. Implement `- (void)progressUpdate:(NSUInteger)progress` delegate in order to show a progress bar or to log the progress.
+
 ### -recognizedText ###
 
 `- (NSString *)recognizedText`
@@ -111,4 +117,4 @@ Clears Tesseract object after text has been recognized from image. Preventing me
 
 `- (void)progressUpdate:(NSUInteger)progress`
 
-Function that will be called on progress update during recognizing
+Function that will be called on progress update during recognizing. progress range is [0...100]
