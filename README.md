@@ -45,7 +45,6 @@ Code Sample
     #import "Tesseract.h"
     
     Tesseract* tesseract = [[Tesseract alloc] initWithDataPath:@"tessdata" language:@"eng"];
-    [tesseract setTessDelegate:self];
     [tesseract setVariableValue:@"0123456789" forKey:@"tessedit_char_whitelist"];
     [tesseract setImage:[UIImage imageNamed:@"image_sample.jpg"]];
     [tesseract recognize];
@@ -53,7 +52,29 @@ Code Sample
     NSLog(@"%@", [tesseract recognizedText]);
     [tesseract clear];
  
- 
+Code sample with progress update
+--------------------------------
+
+    #import "Tesseract.h"
+    
+    - (void) viewDidLoad {
+      Tesseract* tesseract = [[Tesseract alloc] initWithDataPath:@"tessdata" language:@"eng"];
+      [tesseract setTessDelegate:self];
+      [tesseract setVariableValue:@"0123456789" forKey:@"tessedit_char_whitelist"];
+      [tesseract setImage:[UIImage imageNamed:@"image_sample.jpg"]];
+      [tesseract recognizeWithProgressUpdate];
+    
+      NSLog(@"%@", [tesseract recognizedText]);
+      [tesseract clear];
+    }
+
+    /*
+     * this is delegate is getting called everytime the progress changes
+     */
+    - (void)progressUpdate:(NSUInteger)progress {
+      NSLog(@"progress: %d%%",progress);
+    }
+
 Method reference
 ----------------
 

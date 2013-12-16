@@ -201,25 +201,19 @@ namespace tesseract {
     _progress = 0;
     ETEXT_DESC *monitor = new ETEXT_DESC;
 
-    void (^progressBlock)(void) = ^void
-    {
-        if (monitor->progress > _progress)
-        {
+    void (^progressBlock)(void) = ^void {
+        if (monitor->progress > _progress) {
             _progress = monitor->progress;
             [self.tessDelegate progressUpdate:_progress];
         }
     };
   
     dispatch_queue_t backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_source_t timer = createDispatchTimer(1,
-                                                  0,
-                                                  backgroundQueue,
-                                                  progressBlock);
+    dispatch_source_t timer = createDispatchTimer(1, 0, backgroundQueue, progressBlock);
   
     int returnCode = _tesseract->Recognize(monitor);
 
-    if(_progress < 100)
-    {
+    if(_progress < 100) {
         _progress = 100;
         [self.tessDelegate progressUpdate:_progress];
     }
@@ -284,8 +278,7 @@ dispatch_source_t createDispatchTimer(uint64_t interval,
 {
     dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER,
                                                    0, 0, queue);
-    if (timer)
-    {
+    if (timer) {
         dispatch_source_set_timer(timer, dispatch_walltime(NULL, 0), interval, leeway);
         dispatch_source_set_event_handler(timer, block);
         dispatch_resume(timer);
