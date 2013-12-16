@@ -31,7 +31,7 @@ Usage
 Here is the default workflow to extract text from an image:
 
  - Instantiate Tesseract with data path and language
- - Set the delegate
+ - Set the delegate (only needed for recognizing with progress update)
  - Set variables (character set, …)
  - Set the image to analyze
  - Start recognition
